@@ -1,0 +1,22 @@
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 80%;
+    font-size: 0.9rem;
+}
+
+.form>div {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.form>div>input {
+    background: #e3e6f0;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.2rem;
+    box-shadow: 2px 5px #888888;
+    border-radius: 5px;
+}

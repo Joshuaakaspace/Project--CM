@@ -1,0 +1,155 @@
+{% extends 'index.html' %}
+{% block link %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+{% endblock %}
+{% block style %}
+.input-icons i {
+    position: absolute;
+}
+
+.input-icons {
+    width: 100%;
+
+}
+
+.icon {
+    padding: 7px;
+    min-width: 40px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border-color:white;
+
+<!--    text-align: center;-->
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px ;
+  text-align: center;
+  padding: 8px;
+}
+
+{% endblock %}
+{% block body%}
+
+<div>
+        <div class="input-icons">
+<!--            <i class="fas fa-search" style="font-size:24px; padding:7px"></i>-->
+            <input class="input-field" type="text" placeholder="&#xF002; Search..." id="search" name="search" >
+
+        </div>
+    <table name="table1" id="table1" style="margin-top:30px">
+  <tr>
+      <th></th>
+    <th>ID</th>
+    <th>Platform ID</th>
+    <th>Organisation</th>
+      <th>Type</th>
+    <th>Ultimate Parent</th>
+      <th>Action</th>
+    <th>Last Modified</th>
+  </tr>
+        <tbody>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+      <td></td>
+    <td></td>
+    <td></td>
+      <td></td>
+    <td></td>
+
+  </tr>
+        </tbody>
+
+</table>
+
+  </div>
+<script>
+window.onload = function() {
+console.log("in func")
+  refreshTable();
+};
+const source = document.getElementById('search');
+const inputHandler = function(e) {
+  a = e.target.value;
+  console.log("search", a)
+  if (a == ""){
+  console.log("in if")
+    refreshTable();
+    }
+  else{
+      var form = new FormData();
+    form.append("search", a)
+    console.log("in else")
+    $.ajax({
+        url: 'http://127.0.0.1:8000/get_data?search='+a,
+        type: 'GET',
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        data:form,
+        success: function (data) {
+            console.log("data", data)
+            var $table = $('#table1');
+            $table.empty();
+            $table.append('<tr><th></th><th>ID</th><th>Platform ID</th><th>Organisation</th><th>Type</th><th>Ultimate Parent</th><th>Action</th><th>Last Modified</th></tr>');
+            $table.append('<tbody>');
+            console.log("appending body", data.data.length);
+            for (var i = 0; i < data.data.length; i++) {
+                $table.append('<td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].organization +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" style="background-color:blue; border-radius: 12px; border-color:blue; width:50px" onclick="nextview()" >View</button></td><td>'+ data.data[i].lastmodifieddate + '</td><td><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden"></td>');
+
+            console.log("in for")
+        }
+        $table.append('</tbody>');
+
+        },
+        error: function () {
+            console.log('Error fetching data');
+        }
+    });
+};
+
+}
+
+source.addEventListener('input', inputHandler);
+function nextview(){
+console.log(document.getElementById('id_record').value)
+window.location.href = "http://127.0.0.1:8000/home/"+document.getElementById('id_record').value;
+
+}
+    var refreshTable = function() {
+    $.ajax({
+        url: 'http://127.0.0.1:8000/get_data',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log("data", data)
+            var $table = $('#table1');
+            $table.empty();
+            $table.append('<tr><th></th><th>ID</th><th>Platform ID</th><th>Organisation</th><th>Type</th><th>Ultimate Parent</th><th>Action</th><th>Last Modified</th></tr>');
+            $table.append('<tbody>');
+            console.log("appending body", data.data.length);
+            for (var i = 0; i < data.data.length; i++) {
+                $table.append('<td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].organization +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" style="background-color:blue; border-radius: 12px; border-color:blue; width:50px" onclick="nextview()" >View</button></td><td>'+ data.data[i].lastmodifieddate + '</td><td><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden"></td>');
+
+            console.log("in for")
+        }
+        $table.append('</tbody>');
+
+        },
+        error: function () {
+            console.log('Error fetching data');
+        }
+    });
+};
+</script>
+{% endblock %}
