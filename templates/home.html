@@ -12,10 +12,7 @@
 
 }
 
-.icon {
-    padding: 7px;
-    min-width: 40px;
-}
+
 
 .input-field {
     width: 100%;
@@ -45,7 +42,8 @@ td, th {
             <input class="input-field" type="text" placeholder="&#xF002; Search..." id="search" name="search" >
 
         </div>
-    <table name="table1" id="table1" style="margin-top:30px">
+    <button style="width:70px; height:30px; background-color:blue; float: right; margin-righht:20px; margin-top:20px; border-radius: 5px; border-color:blue;">Add</button>
+    <table name="table1" id="table1" style="margin-top:70px; background-color:white;">
   <tr>
       <th></th>
     <th>ID</th>
@@ -105,7 +103,7 @@ const inputHandler = function(e) {
             $table.append('<tbody>');
             console.log("appending body", data.data.length);
             for (var i = 0; i < data.data.length; i++) {
-                $table.append('<td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].organization +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" style="background-color:blue; border-radius: 12px; border-color:blue; width:50px" onclick="nextview()" >View</button></td><td>'+ data.data[i].lastmodifieddate + '</td><td><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden"></td>');
+                $table.append('<td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].name +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" style="background-color:blue; border-color:blue; border-radius: 5px; width:50px" onclick="nextview()" >View</button></td><td>'+ data.data[i].lastmodifieddate + '</td><td><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden"></td>');
 
             console.log("in for")
         }
@@ -139,7 +137,7 @@ window.location.href = "http://127.0.0.1:8000/home/"+document.getElementById('id
             $table.append('<tbody>');
             console.log("appending body", data.data.length);
             for (var i = 0; i < data.data.length; i++) {
-                $table.append('<td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].organization +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" style="background-color:blue; border-radius: 12px; border-color:blue; width:50px" onclick="nextview()" >View</button></td><td>'+ data.data[i].lastmodifieddate + '</td><td><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden"></td>');
+                $table.append('<td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].name +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" style="background-color:blue; border-radius: 5px; border-color:blue; width:50px" onclick="nextview()" >View</button></td><td>'+ data.data[i].lastmodifieddate + '</td><td><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden"></td>');
 
             console.log("in for")
         }
