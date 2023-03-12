@@ -2,24 +2,120 @@
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     {% block link %}{% endblock %}
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     {% load static %}
-
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet"> 
 
     <style>
-{% block style %}{% endblock %}
+    .wrapper .sidebar{
+    background-color:#3459E6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 225px;
+    height: 100%;
+    padding: 20px 0;
+    transition: all 0.5s ease;
+}
+.wrapper .sidebar .profile{
+    margin-bottom: 30px;
+    text-align: center;
+}
 
-</style>
- <link rel="stylesheet" href="{% static 'style.css '%}" />
+.wrapper .sidebar .profile img{
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.wrapper .sidebar .profile h3{
+    color: #ffffff;
+    margin: 10px 0 5px;
+}
+
+.wrapper .sidebar .profile p{
+    color: rgb(206, 240, 253);
+    font-size: 14px;
+}
+.wrapper .sidebar ul li a{
+    display: block;
+    padding: 13px 30px;
+    border-bottom: 1px solid #10558d;
+    color: rgb(241, 237, 237);
+    font-size: 16px;
+    position: relative;
+}
+
+.wrapper .sidebar ul li a .icon{
+    color: #dee4ec;
+    width: 30px;
+    display: inline-block;
+}
+.wrapper .sidebar ul li a:hover,
+.wrapper .sidebar ul li a.active{
+    color: #0c7db1;
+
+    background:white;
+    border-right: 2px solid rgb(5, 68, 104);
+}
+
+.wrapper .sidebar ul li a:hover .icon,
+.wrapper .sidebar ul li a.active .icon{
+    color: #0c7db1;
+}
+
+.wrapper .sidebar ul li a:hover:before,
+.wrapper .sidebar ul li a.active:before{
+    display: block;
+}
+div.content {
+  margin-left: 220px;
+
+}
+
+{% block style %}{% endblock %}
+    </style>
 </head>
 <body>
+    <div class="content" style="overflow:auto;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
 
-    <div class="wrapper" style="height: 100%;
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                  </li>
+
+
+                </ul>
+
+
+            </div>
+                </ul>
+                <form class="d-flex">
+                  <!--<input class="form-control me-sm-2" type="search" placeholder="Search">!-->
+                  <input class="form-control me-sm-2" type="text"placeholder="Search" id="search1" name="search1" >
+                  <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="submit_func()">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+        <div class="wrapper" style="height: 100%;
     overflow: hidden;">
-        <!--Top menu -->
         <div class="sidebar">
             <div style="color: #ffffff; text-align:center"><b>CRM</b></div>
             <div class="profile" style="margin-top:20px">
@@ -30,19 +126,14 @@
                 {% endif %}
 
             </div>
-            <ul>
+            <ul style="list-style-type:none;">
                 <li>
                     <a href="/home/" class="active">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span class="item">Home</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-phone"></i></span>
-                        <span class="item">About Us</span>
-                    </a>
-                </li>
+
                 <li>
                     <a href="#">
                         <span class="icon"><i class="fa fa-gear"></i></span>
@@ -58,14 +149,78 @@
 
             </ul>
         </div>
-
-    <div class="content" style="overflow:auto;">
+            <div class="content" style="overflow:auto;">
 {% block body%}{% endblock %}
 </div>
+        </div>
+
+</div>
 {% block js %}{% endblock %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        function submit_func(){
+            console.log("in submit func")
+            console.log("search", document.getElementById('search1').value)
+            console.log(window.location.href.split("/"))
+            if (
+    window.location.href.split("/").at(-2) == "home"
+   &&  window.location.href.split("/").at(-1) == ""){
+    console.log("hi")
+    a = document.getElementById('search1').value
+  console.log("search", a)
+  if (a == ""){
+  console.log("in if")
+    refreshTable();
+    }
+  else{
+      var form = new FormData();
+    form.append("search", a)
+    console.log("in else")
+    $.ajax({
+        url: 'http://127.0.0.1:8000/get_data?search='+a,
+        type: 'GET',
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        data:form,
+        success: function (data) {
+            console.log("data", data)
+            var $table = $('#table1');
+            $table.empty();
+            $table.append('<tr><th></th><th>ID</th><th>Platform ID</th><th>Organisation</th><th>Type</th><th>Ultimate Parent</th><th>Action</th><th>Last Modified</th></tr>');
+            $table.append('<tbody>');
+            console.log("appending body", data.data.length);
+            for (var i = 0; i < data.data.length; i++) {
+                $table.append('<tr><td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].name +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" class="btn btn-success me-1" onclick="nextview()" > <i class="fa-solid fa-circle-info fa-lg">View</i></button></td><td>'+ data.data[i].lastmodifieddate + '</td><td><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden"></td></tr>');
+
+            console.log("in for")
+        }
+        $table.append('</tbody>');
+
+        },
+        error: function () {
+            console.log('Error fetching data');
+        }
+    });
+};
+  }
+  else{
+  console.log("bye")
+  }
+<!--            var url = window.location.href-->
+<!--            if (window.location.href.endswith("home/"){-->
+<!--                console.log("in condition")-->
+<!--            }-->
+<!--            else{-->
+<!--                console.log("in else")-->
+<!--            }-->
+        }
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 
-    </div>
+
 </body>
 </html>
