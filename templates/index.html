@@ -12,7 +12,8 @@
 
     <style>
     .wrapper .sidebar{
-    background-color:#3459E6;
+    background-color:#D3D3D3;
+    margin-top:80px;
     position: fixed;
     top: 0;
     left: 0;
@@ -35,7 +36,7 @@
 }
 
 .wrapper .sidebar .profile h3{
-    color: #ffffff;
+    color: #000000;
     margin: 10px 0 5px;
 }
 
@@ -46,28 +47,30 @@
 .wrapper .sidebar ul li a{
     display: block;
     padding: 13px 30px;
-    border-bottom: 1px solid #10558d;
-    color: rgb(241, 237, 237);
+    border-bottom: 1px solid #000000;
+    color: #000000;
     font-size: 16px;
     position: relative;
+    margin-left:-30px;
+
 }
 
 .wrapper .sidebar ul li a .icon{
-    color: #dee4ec;
+    color: #000000;
     width: 30px;
     display: inline-block;
 }
 .wrapper .sidebar ul li a:hover,
 .wrapper .sidebar ul li a.active{
-    color: #0c7db1;
+    color: #000000;
 
     background:white;
-    border-right: 2px solid rgb(5, 68, 104);
+    border-right: 2px solid #000000;
 }
 
 .wrapper .sidebar ul li a:hover .icon,
 .wrapper .sidebar ul li a.active .icon{
-    color: #0c7db1;
+    color: ##000000;
 }
 
 .wrapper .sidebar ul li a:hover:before,
@@ -75,7 +78,9 @@
     display: block;
 }
 div.content {
-  margin-left: 220px;
+  margin-left: 225px;
+  padding: 1px 16px;
+  margin-top:80px
 
 }
 
@@ -83,8 +88,8 @@ div.content {
     </style>
 </head>
 <body>
-    <div class="content" style="overflow:auto;">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="height:80px;position: fixed; width:100%">
             <div class="container-fluid">
 
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,14 +99,9 @@ div.content {
                 <ul class="navbar-nav me-auto">
 
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="/home/" style="font-size: xx-large"><b>CRM</b></a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                  </li>
-
-
-                </ul>
+                  </ul>
 
 
             </div>
@@ -112,12 +112,13 @@ div.content {
                   <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="submit_func()">Search</button>
                 </form>
               </div>
+            </nav>
             </div>
-          </nav>
+
+    </div>
         <div class="wrapper" style="height: 100%;
     overflow: hidden;">
         <div class="sidebar">
-            <div style="color: #ffffff; text-align:center"><b>CRM</b></div>
             <div class="profile" style="margin-top:20px">
                 <img src="{% static 'avatar2.png' %}" alt="Avatar">
                 {% if user.is_authenticated %}
@@ -127,7 +128,7 @@ div.content {
 
             </div>
             <ul style="list-style-type:none;">
-                <li>
+                <li style="margin:left:0px">
                     <a href="/home/" class="active">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span class="item">Home</span>
@@ -149,7 +150,7 @@ div.content {
 
             </ul>
         </div>
-            <div class="content" style="overflow:auto;">
+            <div class="content" style="overflow:auto">
 {% block body%}{% endblock %}
 </div>
         </div>
@@ -190,7 +191,7 @@ div.content {
             $table.append('<tbody>');
             console.log("appending body", data.data.length);
             for (var i = 0; i < data.data.length; i++) {
-                $table.append('<tr><td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].name +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" class="btn btn-success me-1" onclick="nextview()" > <i class="fa-solid fa-circle-info fa-lg">View</i></button></td><td>'+ data.data[i].lastmodifieddate + '</td><td><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden"></td></tr>');
+                $table.append('<tr><td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].name +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" class="btn btn-success me-1" onclick="nextview()" > <i class="fa-solid fa-circle-info fa-lg">View</i></button></td><td>'+ data.data[i].lastmodifieddate + '</td></tr><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden">');
 
             console.log("in for")
         }
