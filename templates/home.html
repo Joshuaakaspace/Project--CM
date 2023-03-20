@@ -31,6 +31,10 @@ td, th {
   border: 1px ;
   text-align: center;
   padding: 8px;
+  overflow: auto;
+}
+tbody{
+    overflow:auto;
 }
 
 {% endblock %}
@@ -43,9 +47,9 @@ td, th {
       Records
     </h4>
   </div>
-      <div class="card-body" >
+      <div class="card-body">
         <!--<p class="card-text">!-->
-          <div class="table-responsive">
+          <div style="overflow:auto">
     <table class="table table-striped table-bordered table-hover" name="table1" id="table1" >
   <thead class="bg-light">
   <tr class="fw-bold">
@@ -126,9 +130,9 @@ console.log("in func")
 <!--}-->
 
 <!--source.addEventListener('input', inputHandler);-->
-function nextview(){
-console.log(document.getElementById('id_record').value)
-window.location.href = "http://127.0.0.1:8000/home/"+document.getElementById('id_record').value;
+function nextview(dataid){
+console.log("dataid",dataid)
+window.location.href = "http://127.0.0.1:8000/home/"+dataid;
 
 }
     var refreshTable = function() {
@@ -144,7 +148,7 @@ window.location.href = "http://127.0.0.1:8000/home/"+document.getElementById('id
             $table.append('<tbody>');
             console.log("appending body", data.data.length);
             for (var i = 0; i < data.data.length; i++) {
-                $table.append('<tr><td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].name +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" class="btn btn-success me-1" onclick="nextview()" > <i class="fa-solid fa-circle-info fa-lg">View</i></button></td><td>'+ data.data[i].lastmodifieddate + '</td></tr><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden">');
+                $table.append('<tr><td><input type="checkbox" name="check" id="" disabled></td><td>'+ data.data[i].id +'</td><td>'+ data.data[i].sourcereferenceid +'</td><td>'+ data.data[i].name +'</td><td>'+ data.data[i].segment_type +'</td><td>'+ data.data[i].ultimate_parent_id +'</td><td><button type="button" class="btn btn-success me-1" onclick="nextview('+ data.data[i].id +')" > <i class="fa-solid fa-circle-info fa-lg">View</i></button></td><td>'+ data.data[i].lastmodifieddate + '</td></tr><input value="' + data.data[i].id + '" name="id_record" id="id_record" type="hidden">');
 
             console.log("in for")
         }

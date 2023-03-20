@@ -57,6 +57,30 @@ class DataSerializers(serializers.ModelSerializer):
         except:
             date_time = ""
         rep["lastmodifieddate"] = date_time
+        try:
+            a = str(instance.createddate)
+            print("a", a)
+            b = a.split(" ")
+            date = b[0].split("-")
+            date = date[2] + "-" + date[1] + "-" + date[0]
+            time = b[1][0:5]
+            print("datentime", date, time)
+            date_time = time + "   " + date
+        except:
+            date_time = ""
+        rep["createddate"] = date_time
+        try:
+            a = str(instance.manualapprovaldate)
+            print("a", a)
+            b = a.split(" ")
+            date = b[0].split("-")
+            date = date[2] + "-" + date[1] + "-" + date[0]
+            time = b[1][0:5]
+            print("datentime", date, time)
+            date_time = time + "   " + date
+        except:
+            date_time = ""
+        rep["manualapprovaldate"] = date_time
         # print("datentime", datentime)
         return rep
 
@@ -118,7 +142,15 @@ class DataSerializers(serializers.ModelSerializer):
     def get_ot_lastmodified_date(self, obj):
         try:
             sfdc = table2.objects.filter(table1id=obj.id).first()
-            return str(sfdc.lastmodifieddate)
+            a = str(sfdc.lastmodifieddate)
+            print("a", a)
+            b = a.split(" ")
+            date = b[0].split("-")
+            date = date[2] + "-" + date[1] + "-" + date[0]
+            time = b[1][0:5]
+            print("datentime", date, time)
+            date_time = time + "   " + date
+            return date_time
         except:
             return ""
 
@@ -167,7 +199,15 @@ class DataSerializers(serializers.ModelSerializer):
     def get_hi_last_modified_date(self, obj):
         try:
             table4query = table4.objects.filter(table1id=obj.id).first()
-            return str(table4query.lastmodifieddate)
+            a = str(table4query.lastmodifieddate)
+            print("a", a)
+            b = a.split(" ")
+            date = b[0].split("-")
+            date = date[2] + "-" + date[1] + "-" + date[0]
+            time = b[1][0:5]
+            print("datentime", date, time)
+            date_time = time + "   " + date
+            return str(date_time)
         except:
             return ""
 
@@ -190,7 +230,15 @@ class DataSerializers(serializers.ModelSerializer):
         try:
             table4query = table4.objects.filter(table1id=obj.id).first()
             table5query = table5.objects.filter(table4id=table4query.id).first()
-            return str(table5query.lastmodifieddate)
+            a = str(table5query.lastmodifieddate)
+            print("a", a)
+            b = a.split(" ")
+            date = b[0].split("-")
+            date = date[2] + "-" + date[1] + "-" + date[0]
+            time = b[1][0:5]
+            print("datentime", date, time)
+            date_time = time + "   " + date
+            return date_time
         except:
             return ""
 
