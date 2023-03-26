@@ -65,10 +65,17 @@ class GetData(APIView):
         record_id = request.query_params.get('record_id', None)
 
         if search:
-            qs = table1.objects.filter(name__icontains=search)
-            serializer = DataSerializers(qs, many=True)
-            return Response({'success': True, 'message': '', 'data': serializer.data},
-                            status=status.HTTP_200_OK)
+            try:
+                search = int(search)
+                qs = table1.objects.filter(permid__icontains=search)
+                serializer = DataSerializers(qs, many=True)
+                return Response({'success': True, 'message': '', 'data': serializer.data},
+                                status=status.HTTP_200_OK)
+            except:
+                qs = table1.objects.filter(name__icontains=search)
+                serializer = DataSerializers(qs, many=True)
+                return Response({'success': True, 'message': '', 'data': serializer.data},
+                                status=status.HTTP_200_OK)
         elif record_id:
             qs = table1.objects.filter(id=int(record_id))
             if qs:
