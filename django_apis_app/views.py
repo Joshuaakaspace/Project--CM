@@ -86,7 +86,7 @@ class GetData(APIView):
                 return Response({'success': True, 'message': '', 'data': []},
                                 status=status.HTTP_200_OK)
         else:
-            qs = table1.objects.all()
+            qs = table1.objects.all().order_by('-lastmodifieddate')[0:10]
             serializer = DataSerializers(qs, many=True)
             return Response({'success': True, 'message': '', 'data': serializer.data},
                             status=status.HTTP_200_OK)
