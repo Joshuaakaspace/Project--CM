@@ -7,11 +7,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
-    width: 100%;
+    width: 82%;
     font-size: 0.9rem;
     padding: 20px;
     height: 100%;
-    overflow: auto
+position:fixed;
+    overflow:auto;
+<!--    overflow: auto-->
 
 }
 
@@ -36,12 +38,27 @@ border: 0;
     background-color:white;
     border-bottom: 1px solid #e3e6f0;
 }
+.form>div>a>input {
+    background: white;
+<!--    border: none;-->
+    font-size: 0.9rem;
+    padding: 0.5rem 0.5rem;
+border: 0;
+<!--  border-bottom: 1px solid red;-->
+  outline: 0;
+<!--    box-shadow: 2px 5px #888888;-->
+<!--    border-radius: 5px;-->
+<!--    border: 0;-->
+<!--    outline: 0;-->
+    background-color:white;
+    border-bottom: 1px solid #e3e6f0;
+}
 .form>div>label{
     color:blue;
 }
 {% endblock %}
 {% block body%}
-<div style="margin-top:20px; width:100%; background-color:white;margin-bottom:30px">
+<div style="margin-top:20px; width:100%; background-color:white;margin-bottom:50px">
     <div class="form" style="padding-bottom:120px">
                 <input type="hidden" id="id_record" name="idrecord" value="{{data.id}}">
                 <div>
@@ -50,7 +67,12 @@ border: 0;
                 </div>
                 <div>
                     <label for="">Ultimate Parent</label>
-                    <input type="text" id="ultimateparent" name="ultimateparent" value="{{data.ultimate_parent_id}}" disabled>
+                     <a href="http://127.0.0.1:8000/home/{{data.parent_id_table1}}">
+                         <input type="text" id="ultimateparent" name="ultimateparent" value="{{data.ultimate_parent_id}}" disabled></a>
+                </div>
+                <div>
+                    <label for="">Ultimate Parent Name</label>
+                    <input type="text" id="ultimateparentname" name="ultimateparentname" value="{{data.parent_name}}" disabled>
                 </div>
                 <div>
                     <label for="">State</label>

@@ -23,6 +23,8 @@ class DataSerializers(serializers.ModelSerializer):
     legalentity = serializers.SerializerMethodField()
     parent_id = serializers.SerializerMethodField()
     ultimate_parent_id = serializers.SerializerMethodField()
+    parent_name = serializers.SerializerMethodField()
+    parent_id_table1 = serializers.SerializerMethodField()
     customer_type = serializers.SerializerMethodField()
     # source_reference_id = serializers.SerializerMethodField()
     ot_lastmodified_by = serializers.SerializerMethodField()
@@ -37,7 +39,7 @@ class DataSerializers(serializers.ModelSerializer):
                   "entity_url", "org_type", "ot_lastmodified_date", "ot_lastmodified_by",
                   "customer_type", "ultimate_parent_id", "parent_id", "legalentity", "override", "hi_last_modified_date",
                   "hi_last_modified_id", "reason", "override_last_modified_date", "override_last_modified_id", "survivor",
-                  "non_survivor", "segment_name", "segment_type", "heirarchie_name", "country"]
+                  "non_survivor", "segment_name", "segment_type", "heirarchie_name", "country", "parent_name", "parent_id_table1"]
         # fields = ["a_number", "account_name", "account_status", "address", "country", "last_updated", "segment_source", "entity_url",
         #           "unavailable", "segmentation_details", "sfdc_segmentation", "modified"]
 
@@ -173,6 +175,24 @@ class DataSerializers(serializers.ModelSerializer):
             table4query = table4.objects.filter(table1id=obj.id).first()
             return str(table4query.ultimateparentid.sourcereferenceid)
         except:
+            return ""
+
+    def get_parent_id_table1(self, obj):
+        try:
+            table4query = table4.objects.filter(table1id=obj.id).first()
+            table3query = table3.objects.filter(id=table4query.ultimateparentid.id).first()
+            return str(table3query.table1id.id)
+        except:
+            return ""
+
+    def get_parent_name(self, obj):
+        try:
+            table4query = table4.objects.filter(table1id=obj.id).first()
+            table3query = table3.objects.filter(id=table4query.ultimateparentid.id).first()
+            print("testing", table3query.table1id.name)
+            return str(table3query.table1id.name)
+        except:
+            print("testing in except")
             return ""
 
     def get_parent_id(self, obj):
