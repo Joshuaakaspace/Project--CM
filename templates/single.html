@@ -65,11 +65,16 @@ border: 0;
                     <label for="">Perm Id</label>
                     <input type="text"  id="permid" name="permid" value="{{data.permid}}"  disabled>
                 </div>
-                <div>
+        <div>
                     <label for="">Ultimate Parent</label>
-                     <a href="http://127.0.0.1:8000/home/{{data.parent_id_table1}}">
+                    {% if data.parent_id_table1 %}
+                    <a href="http://127.0.0.1:8000/home/{{data.parent_id_table1}}">
                          <input type="text" id="ultimateparent" name="ultimateparent" value="{{data.ultimate_parent_id}}" disabled></a>
+                    {% else %}
+                    <input type="text" id="ultimateparent" name="ultimateparent" value="{{data.ultimate_parent_id}}" disabled>
+                    {% endif %}
                 </div>
+
                 <div>
                     <label for="">Ultimate Parent Name</label>
                     <input type="text" id="ultimateparentname" name="ultimateparentname" value="{{data.parent_name}}" disabled>
