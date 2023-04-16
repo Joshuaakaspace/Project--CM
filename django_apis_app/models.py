@@ -81,7 +81,7 @@ class lkp_table7(models.Model):
 
 
 class table1(models.Model):  # table1 = table 1
-    id = models.CharField(max_length=100, primary_key=True)  # show on frontend
+    id = models.BigIntegerField(max_length=100, primary_key=True, auto_created=True)  # show on frontend
     permid = models.BigIntegerField(blank=True, null=True)  # show on frontend
     name = models.CharField(max_length=500, blank=True, null=True)  # show on frontend
     streetaddress = models.CharField(max_length=500, blank=True, null=True)  ##show on frontend
@@ -120,7 +120,7 @@ class Lkptable2name(models.Model):
 
 
 class table2(models.Model):
-    id = models.CharField(max_length=38, primary_key=True)
+    id = models.BigIntegerField(primary_key=True)
     table1id = models.ForeignKey(table1, on_delete=models.CASCADE, blank=True, null=True)
     lkp_table2nameid = models.ForeignKey(Lkptable2name, on_delete=models.CASCADE, blank=True, null=True)
     value = models.CharField(max_length=500, blank=True, null=True)  # show on frontend as org type
@@ -140,7 +140,7 @@ class table2(models.Model):
 
 
 class table3(models.Model):
-    id = models.CharField(max_length=38, primary_key=True)
+    id = models.BigIntegerField(max_length=38, primary_key=True)
     table1id = models.ForeignKey(table1, on_delete=models.CASCADE, blank=True, null=True)
     lkp_table3nameid = models.ForeignKey(Lkptable2name, on_delete=models.CASCADE, blank=True, null=True)
     sourcereferenceid = models.CharField(max_length=100)  # show on frontend
@@ -176,8 +176,8 @@ class table4(models.Model):
     parentid = models.ForeignKey(table3, related_name='parent_id', on_delete=models.CASCADE, blank=True,
                                  null=True)  # show on frontend table3id of the parentid
     lkp_table7id = models.ForeignKey(lkp_table7, on_delete=models.CASCADE, blank=True, null=True)
-    legalentity = models.BooleanField()  # show on frontend as checkbox
-    override = models.BooleanField()  # show on frontend as checkbox
+    legalentity = models.BooleanField(default=False)  # show on frontend as checkbox
+    override = models.BooleanField(default=False)  # show on frontend as checkbox
     description = models.TextField(blank=True, null=True)
     lastverifieddate = models.DateTimeField(blank=True, null=True)  # show on frontend  HI verified Modified date
     lastverifiedbyid = models.CharField(max_length=500, blank=True,

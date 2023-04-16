@@ -11,5 +11,6 @@ urlpatterns = [
     path('get_data', GetData.as_view()),
     path('home/', test),
     path('home/<int:id>', login_required(singleview)),
+    path('home/edit/<int:id>', login_required(editview)),
     path('logout/', signout, name = "logout" ),
 ]

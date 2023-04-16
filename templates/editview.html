@@ -1,0 +1,258 @@
+{% extends 'index.html' %}
+{% block link %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+{% endblock %}
+{% block style %}
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 82%;
+    font-size: 0.9rem;
+    padding: 20px;
+    height: 100%;
+position:fixed;
+    overflow:auto;
+<!--    overflow: auto-->
+
+}
+
+
+.form>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form>div>input {
+    background: white;
+<!--    border: none;-->
+    font-size: 0.9rem;
+    padding: 0.5rem 0.5rem;
+border: 0;
+<!--  border-bottom: 1px solid red;-->
+  outline: 0;
+<!--    box-shadow: 2px 5px #888888;-->
+<!--    border-radius: 5px;-->
+<!--    border: 0;-->
+<!--    outline: 0;-->
+    background-color:white;
+    border-bottom: 1px solid #e3e6f0;
+}
+.form>div>a>input {
+    background: white;
+<!--    border: none;-->
+    font-size: 0.9rem;
+    padding: 0.5rem 0.5rem;
+border: 0;
+<!--  border-bottom: 1px solid red;-->
+  outline: 0;
+<!--    box-shadow: 2px 5px #888888;-->
+<!--    border-radius: 5px;-->
+<!--    border: 0;-->
+<!--    outline: 0;-->
+    background-color:white;
+    border-bottom: 1px solid #e3e6f0;
+}
+.form>div>label{
+    color:blue;
+}
+{% endblock %}
+{% block body%}
+<div style="margin-top:20px; width:100%; background-color:white;margin-bottom:50px">
+    <form action="/home/edit/{{data.id}}" method="POST">
+        {% csrf_token %}
+    <div class="form"  style="padding-bottom:120px" >
+
+                <input type="hidden" id="id_record" name="id_record" value="{{data.id}}">
+                <div>
+                    <label for="">Perm Id</label>
+                    <input type="text"  id="permid" name="permid" value="{{data.permid}}"  >
+                </div>
+        <div>
+                    <label for="">Ultimate Parent</label>
+                    <input type="text" id="ultimateparent" name="ultimateparent" value="{{data.ultimate_parent_id}}" disabled>
+                </div>
+
+                <div>
+                    <label for="">Ultimate Parent Name</label>
+                    <input type="text" id="ultimateparentname" name="ultimateparentname" value="{{data.parent_name}}" >
+                </div>
+                <div>
+                    <label for="">State</label>
+                    <input type="text" id="state" name="state" value="{{data.state}}" >
+                </div>
+
+
+                <div>
+                    <label for="">Parent</label>
+                    <input type="text" id="parent" name="parent" value="{{data.parent_id}}" disabled>
+                </div>
+                <div>
+                    <label for="">Source Reference ID</label>
+                    <input type="text" id="sourceid" name="sourceid" value="{{data.sourcereferenceid}}" disabled>
+                </div>
+                <div>
+                    <label for="">Address</label>
+                    <input type="text" id="streetaddress" name="streetaddress" value="{{data.streetaddress}}"  >
+                </div>
+
+                <div>
+                    <label for="">Organization Type</label>
+                    <input type="text" id="organizationtype" value="{{data.org_type}}" name="organizationtype" >
+                </div>
+                <div>
+                    <label for="">City</label>
+                    <input type="text"  id="city" name="city" value="{{data.city}}"  >
+                </div>
+                <div>
+                    <label for="">Survivor</label>
+                    <input type="text" id="survivor" value="{{data.survivor}}" disabled>
+                </div>
+                <div>
+                    <label for="">Entity Url</label>
+                    <input type="text" id="entityurl" name="entityurl" value="{{data.segment_source}}" >
+                </div>
+
+                <div>
+                    <label for="">Country</label>
+
+                        <input type="text" id="country" name="country" value="{{data.country}}" >
+<!--                    <div style="position:absolute; left:0; right:0; top:0; bottom:0;" onclick="abcd('abc')"></div>-->
+                </div>
+                <div>
+                    <label for="">Non Survivor</label>
+                    <input type="text" id="nonsurvivor" value="{{data.non_survivor}}" disabled>
+                </div>
+                <div>
+                    <label for="">Website</label>
+                    <input type="text" id="segment_source" name="segment_source" value="{{data.entity_url}}" >
+                </div>
+                <div>
+                    <label for="">Region</label>
+                    <input type="text" id="region" name="region" value="{{data.region}}" >
+                </div>
+                <div>
+                    <label for="">Last Updated By</label>
+                    <input type="text" id="lastmodifiedby" value="{{data.lastmodifiedbyid}}" name="entity_url" disabled>
+                </div>
+                <div>
+                    <label for="">Sub Region</label>
+                    <input type="text" id="subregion" name="subregion" value="{{data.subregion}}" >
+                </div>
+                <div>
+                    <label for="">Customer Master Id</label>
+                    <input type="text" id="customerid" value="{{data.id}}" disabled>
+                </div>
+                <div>
+                    <label for="">Last Modified Date</label>
+                    <input type="text" id="lastmodifieddate" value="{{data.lastmodifieddate}}" name="entity_url" disabled>
+                </div>
+
+
+
+                <div>
+                    <label for="">Created By</label>
+                    <input type="text"  id="createdby" name="createdby" value="{{data.createdbyid}}"  disabled>
+                </div>
+                <div>
+                    <label for="">Created Date</label>
+                    <input type="text" id="createddate" name="createddate" value="{{data.createddate}}" disabled>
+                </div>
+                <div>
+                    <label for="">Customer Type</label>
+                    <input type="text" id="customertype" name="customertype" value="{{data.customer_type}}" >
+                </div>
+
+                <div>
+                    <label for="">Heirarchie name</label>
+
+                        <input type="text" id="heirarchie_name" name="heirarchie_name" value="{{data.heirarchie_name}}" >
+<!--                    <div style="position:absolute; left:0; right:0; top:0; bottom:0;" onclick="abcd('abc')"></div>-->
+                </div>
+                <div>
+                    <label for="">Hi Last Modified</label>
+                    <input type="text" id="hi_last_modified_date" name="hi_last_modified_date" value="{{data.hi_last_modified_date}}" disabled>
+                </div>
+                <div>
+                    <label for="">Hi Last Modified By</label>
+                    <input type="text" id="hi_last_modified_id" name="hi_last_modified_id" value="{{data.hi_last_modified_id}}" disabled>
+                </div>
+                <div>
+                    <label for="">Lkp Country Id</label>
+                    <input type="text" id="lkp_countryid" name="lkp_countryid" value="{{data.lkp_countryid}}"  disabled>
+                </div>
+
+                <div>
+                    <label for="">Manual Approval Date</label>
+                    <input type="text" id="manualapprovaldate" value="{{data.manualapprovaldate}}" name="manualapprovaldate" disabled>
+                </div>
+                <div>
+                    <label for="">Name</label>
+                    <input type="text"  id="name" name="name" value="{{data.name}}"  >
+                </div>
+                <div>
+                    <label for="">OA Address Type</label>
+                    <input type="text" id="oaaddresstype" name="oaaddresstype" value="{{data.oaaddresstype}}" >
+                </div>
+                <div>
+                    <label for="">OT Last Modified By</label>
+                    <input type="text" id="ot_lastmodified_by" value="{{data.ot_lastmodified_by}}" disabled>
+                </div>
+
+                <div>
+                    <label for="">OT Last Modified</label>
+
+                        <input type="text" id="ot_lastmodified_date" value="{{data.ot_lastmodified_date}}" disabled>
+<!--                    <div style="position:absolute; left:0; right:0; top:0; bottom:0;" onclick="abcd('abc')"></div>-->
+                </div>
+
+                <div>
+                    <label for="">Override Last Modified</label>
+                    <input type="text" id="override_last_modified_date" name="override_last_modified_date" value="{{data.override_last_modified_date}}" disabled>
+                </div>
+                <div>
+                    <label for="">Override Last Modified By</label>
+                    <input type="text" id="override_last_modified_id" name="override_last_modified_id" value="{{data.override_last_modified_id}}"  disabled>
+                </div>
+                <div>
+                    <label for="">Postcode</label>
+                    <input type="text" id="postcode" name="postcode" value="{{data.postcode}}" >
+                </div>
+                <div>
+                    <label for="">Reason</label>
+                    <input type="text" id="reason" value="{{data.reason}}" name="reason" >
+                </div>
+                <div>
+                    <label for="">Segment Name</label>
+                    <input type="text" id="segment_name" name="segment_name" value="{{data.segment_name}}"  >
+                </div>
+                <div>
+                    <label for="">Segment Type</label>
+                    <input type="text" id="segment_type" name="segment_type" value="{{data.segment_type}}" >
+                </div>
+        <div>
+                    <label for="">Override</label>
+            <span>
+                <input type="checkbox" id="override" name="override" {% if data.override %} checked="checked" {% endif %} style="margin-top:10px" >
+            </span>
+        </div>
+        <div>
+                    <label for="">Manual Approval</label>
+            <span>
+                    <input type="checkbox" id="manualapproval" name="manualapproval" {% if data.manualapproval %} checked="checked" {% endif %} style="margin-top:10px" >
+            </span>
+        </div>
+         <div>
+                    <label for="">Legal Entity</label>
+                    <span>
+                    <input type="checkbox" id="legalentity" name="legalentity" {% if data.legalentity %} checked="checked" {% endif %} style="margin-top:10px" >
+                    </span>
+         </div>
+        <button type="submit" class="btn btn-success me-1">Submit</button>
+
+
+
+</div>
+    </form>
+</div>
+{% endblock %}

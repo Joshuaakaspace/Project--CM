@@ -49,41 +49,34 @@ class DataSerializers(serializers.ModelSerializer):
         rep = super(DataSerializers, self).to_representation(instance)
         try:
             a = str(instance.lastmodifieddate)
-            print("a", a)
             b = a.split(" ")
             date = b[0].split("-")
             date = date[2] + "-" + date[1] + "-" + date[0]
             time = b[1][0:5]
-            print("datentime", date, time)
             date_time = time + "   " + date
         except:
             date_time = ""
         rep["lastmodifieddate"] = date_time
         try:
             a = str(instance.createddate)
-            print("a", a)
             b = a.split(" ")
             date = b[0].split("-")
             date = date[2] + "-" + date[1] + "-" + date[0]
             time = b[1][0:5]
-            print("datentime", date, time)
             date_time = time + "   " + date
         except:
             date_time = ""
         rep["createddate"] = date_time
         try:
             a = str(instance.manualapprovaldate)
-            print("a", a)
             b = a.split(" ")
             date = b[0].split("-")
             date = date[2] + "-" + date[1] + "-" + date[0]
             time = b[1][0:5]
-            print("datentime", date, time)
             date_time = time + "   " + date
         except:
             date_time = ""
         rep["manualapprovaldate"] = date_time
-        # print("datentime", datentime)
         return rep
 
     def get_sourcereferenceid(self, obj):
@@ -145,12 +138,10 @@ class DataSerializers(serializers.ModelSerializer):
         try:
             sfdc = table2.objects.filter(table1id=obj.id).first()
             a = str(sfdc.lastmodifieddate)
-            print("a", a)
             b = a.split(" ")
             date = b[0].split("-")
             date = date[2] + "-" + date[1] + "-" + date[0]
             time = b[1][0:5]
-            print("datentime", date, time)
             date_time = time + "   " + date
             return date_time
         except:
@@ -189,10 +180,8 @@ class DataSerializers(serializers.ModelSerializer):
         try:
             table4query = table4.objects.filter(table1id=obj.id).first()
             table3query = table3.objects.filter(id=table4query.ultimateparentid.id).first()
-            print("testing", table3query.table1id.name)
             return str(table3query.table1id.name)
         except:
-            print("testing in except")
             return ""
 
     def get_parent_id(self, obj):
@@ -205,14 +194,14 @@ class DataSerializers(serializers.ModelSerializer):
     def get_legalentity(self, obj):
         try:
             table4query = table4.objects.filter(table1id=obj.id).first()
-            return str(table4query.legalentity)
+            return table4query.legalentity
         except:
             return ""
 
     def get_override(self, obj):
         try:
             table4query = table4.objects.filter(table1id=obj.id).first()
-            return str(table4query.override)
+            return table4query.override
         except:
             return ""
 
@@ -220,12 +209,10 @@ class DataSerializers(serializers.ModelSerializer):
         try:
             table4query = table4.objects.filter(table1id=obj.id).first()
             a = str(table4query.lastmodifieddate)
-            print("a", a)
             b = a.split(" ")
             date = b[0].split("-")
             date = date[2] + "-" + date[1] + "-" + date[0]
             time = b[1][0:5]
-            print("datentime", date, time)
             date_time = time + "   " + date
             return str(date_time)
         except:
@@ -251,12 +238,10 @@ class DataSerializers(serializers.ModelSerializer):
             table4query = table4.objects.filter(table1id=obj.id).first()
             table5query = table5.objects.filter(table4id=table4query.id).first()
             a = str(table5query.lastmodifieddate)
-            print("a", a)
             b = a.split(" ")
             date = b[0].split("-")
             date = date[2] + "-" + date[1] + "-" + date[0]
             time = b[1][0:5]
-            print("datentime", date, time)
             date_time = time + "   " + date
             return date_time
         except:
